@@ -1,0 +1,19 @@
+# this is a comment
+
+employee:
+  name: hazlan
+  age: 25
+  address: 1.7
+
+# list data type in yaml
+
+employees:
+ - name: hazlan
+   age: 25
+   address: 1.7
+ - name: qodri
+   age: 24
+   address:
+    - old: 1.8
+    - new: 1.9
+ 
