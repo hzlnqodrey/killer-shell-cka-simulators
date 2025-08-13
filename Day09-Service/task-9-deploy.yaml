@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind:  Deployment
+metadata:
+  name: myapp
+  labels:
+    env: demo
+spec:
+  template:
+    metadata:
+      labels:
+        env: demo
+      name: nginx
+    spec:
+      containers:
+      - image: nginx:1.23.4-alpine
+        name: nginx
+        ports:
+        - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      env: demo
+
+# hint: Create a Deployment named myapp that creates 1 replica running the image nginx:1.23.4-alpine. Expose the container port 80.

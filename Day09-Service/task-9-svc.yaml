@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  labels:
+    env: demo
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: myapp
+    env: demo
+
+# hint: Create a Service named myapp of type ClusterIP that exposes port 80 and maps to the target port 80.
+
+
