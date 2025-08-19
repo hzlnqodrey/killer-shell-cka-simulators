@@ -9,6 +9,7 @@ spec:
     metadata:
       labels:
         env: demo
+        app: myapp
       name: nginx
     spec:
       containers:
@@ -16,9 +17,11 @@ spec:
         name: nginx
         ports:
         - containerPort: 80
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
+      app: myapp
       env: demo
 
 # hint: Create a Deployment named myapp that creates 1 replica running the image nginx:1.23.4-alpine. Expose the container port 80.
+# hint 2: add labels - app: myapp in metadata and selector, so it can matching with respective service

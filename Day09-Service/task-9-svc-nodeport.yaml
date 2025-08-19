@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+  labels:
+    env: demo
+spec:
+  type: NodePort
+  ports:
+#    - protocol: TCP
+    - port: 80
+      targetPort: 80
+      nodePort: 30001
+  selector:
+    app: myapp
+    env: demo
+
+# hint: Create a Service named myapp of type NodePort that exposes port 80 and maps to the target port 80. and additional nodePort: 30000
+# hint 2: if you want to curl againts service outside cluster, you need to read the Getting Started kind how to add extra port mappings with NodePort
+# hint 3: wget -qO- localhost:30001
+#	  curl http://localhost:30001
