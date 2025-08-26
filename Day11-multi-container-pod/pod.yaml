@@ -1,0 +1,20 @@
+# hint: 
+# init-containers	:    run before the actual app in this pod, in order to do certain task 	
+#			after init container complete, so that actual app started
+# sidecar-container	:    run and ride along with actual app container, provide certain input or take certain output, like logging agent
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  label:
+    name: myapp-pod
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    env:
+    - name: FIRSTNAME
+      value: "hzlnqodrey"
+
+
