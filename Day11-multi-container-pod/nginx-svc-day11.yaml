@@ -1,0 +1,31 @@
+# k expose deploy nginx-day11 --name myservice --port 80
+# kgs myservice -o yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2025-08-26T15:50:35Z"
+  labels:
+    app: nginx-day11
+  name: myservice
+  namespace: default
+  resourceVersion: "2805"
+  uid: 97fc1dae-e71e-43db-a070-cf01ede6bebc
+spec:
+  clusterIP: 10.96.81.63
+  clusterIPs:
+  - 10.96.81.63
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx-day11
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
