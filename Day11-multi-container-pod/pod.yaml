@@ -17,6 +17,28 @@ spec:
     env:
     - name: FIRSTNAME
       value: "hzlnqodrey"
+
+  # add sidecar (+ shared volume and the main container writing into the shared log)
+  - name: log-sidecar
+    image: busybox:1.28
+    # keep following the shared log file (if present). If not present yet, sleep+retry.
+    command:
+      - sh
+      - -c
+      - |
+        while true; do
+          if [ -f /shared-logs/myapp.log ]; then
+            tail -n +1 -F /shared-logs/myapp.log
+          else
+            echo "sidecar: waiting for /shared-logs/myapp.log"
+            sleep 2
+          fi
+        done
+    volumeMounts:
+    - name: shared-logs
+      mountPath: /shared-logs
+
+
   initContainers:
   - name: init-myservice
     image: busybox:1.28
