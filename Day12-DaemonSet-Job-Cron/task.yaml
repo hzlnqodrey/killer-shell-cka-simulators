@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/5 * * * *" # Task:after every 5 minutes
+  jobTemplate:
+    spec:
+      containers:
+      - name: hello
+        image: busybox:1.28
+        imagePullPolicy: IfNotPresent
+        command: ['sh', '-c', 'date; echo 40daysofkubernetes']
+      restartPolicy: OnFailure
