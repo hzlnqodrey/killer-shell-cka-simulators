@@ -1,0 +1,10 @@
+
+[Taints]
+
+* Tainting a Node: *
+
+	> kubectl taint nodes <node-name> key=gpu:NoSchedule
+
+* Remove Taint in a Node  * (add '-' add the end of effect value)
+
+	> kubectl taint nodes <node-name> key=gpu:NoSchedule-
