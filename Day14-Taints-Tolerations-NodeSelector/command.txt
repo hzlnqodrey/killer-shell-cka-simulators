@@ -3,8 +3,14 @@
 
 * Tainting a Node: *
 
-	> kubectl taint nodes <node-name> key=gpu:NoSchedule
+	> kubectl taint nodes <node-name> gpu=true:NoSchedule
 
 * Remove Taint in a Node  * (add '-' add the end of effect value)
 
-	> kubectl taint nodes <node-name> key=gpu:NoSchedule-
+	> kubectl taint nodes <node-name> gpu=true:NoSchedule-
+
+[Node Labels]
+
+* Give Node to Labels *
+
+	> k labels node <node-name> gpu=false
