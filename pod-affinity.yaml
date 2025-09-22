@@ -1,0 +1,24 @@
+api: v1
+kind: Pod
+metadata:
+  labels:
+    run: redis
+  name: redis-aff
+spec:
+  containers:
+  - image: redis
+    name: redis
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+
+  # Affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+              - key: disktype
+                operator: In # there is Exist operator to
+                values:
+                - ssd
