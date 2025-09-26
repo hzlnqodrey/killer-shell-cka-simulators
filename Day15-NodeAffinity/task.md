@@ -43,6 +43,24 @@ TASK:
 	kd po/redis-aff | grep -n -i -A5 -B5 "node"
 		5:Node:             hzln-cluster-kind-worker/172.18.0.3
 
-[] create a new pod with redis as the image and add the nodeaffinity with property requiredDuringSchedulingIgnoredDuringExecution and condition disktype without any value
-[] add the label to worker02 node with disktype and no value
-√ensure that pod2 should be scheduled on worker02 node
+[V] create a new pod with redis as the image and add the nodeaffinity with property requiredDuringSchedulingIgnoredDuringExecution and condition disktype without any value
+  # HINT
+  
+	# EXISTS Operator
+  	# in the node affinity section, remove disktype values, change the oprator value to Exists
+	
+	# pod redis-aff is still running, why?
+	#  because the pod just choose and check any label only, even thought it only has "disktype" key label, and pod choose it
+
+
+[] add the label to worker02 node with disktype and no value ensure that pod2 should be scheduled on worker02 node
+  # HINT
+
+	# how you do it
+	>kubectl label nodes hzln-cluster-kind-worker2 disktype=
+		# node/hzln-cluster-kind-worker2 labeled
+
+	# assign any new pod with only has affinity requirred= disktype label and operator exists
+	
+
+[] add prefer
