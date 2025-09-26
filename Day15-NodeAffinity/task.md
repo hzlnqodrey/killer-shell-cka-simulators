@@ -53,7 +53,7 @@ TASK:
 	#  because the pod just choose and check any label only, even thought it only has "disktype" key label, and pod choose it
 
 
-[] add the label to worker02 node with disktype and no value ensure that pod2 should be scheduled on worker02 node
+[V] add the label to worker02 node with disktype and no value ensure that pod2 should be scheduled on worker02 node
   # HINT
 
 	# how you do it
@@ -61,6 +61,34 @@ TASK:
 		# node/hzln-cluster-kind-worker2 labeled
 
 	# assign any new pod with only has affinity requirred= disktype label and operator exists
+	> re-apply: k apply -f <file>
+	Every 2.0s: kubectl get pod -o wide                                                                                                                                                                                 x-MacBook-Air
+                                                                                                                                                                                                                                       in 0.079s (0)
+NAME        READY   STATUS    RESTARTS   AGE   IP           NODE                        NOMINATED NODE   READINESS GATES
+redis-aff   1/1     Running   0          29s   10.244.1.2   hzln-cluster-kind-worker2   <none>           <none>
 	
 
 [] add prefer
+
+	# I add this in nginx.yaml file 
+```yaml
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: disktype
+            operator: In
+            values:
+            - hdd
+      - weight: 50
+        preference:
+          matchExpressions:
+          - key: on-demand
+            operator: In
+            values:
+            - common
+```
+
+	# and the status, is pod running in node1 (hzln-cluster-kind-worker)

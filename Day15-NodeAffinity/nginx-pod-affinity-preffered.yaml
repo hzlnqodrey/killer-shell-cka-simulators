@@ -3,36 +3,29 @@ kind: Pod
 metadata:
   creationTimestamp: null
   labels:
-    run: redis
-  name: redis-3
+    run: nginx
+  name: nginx-aff-pref
 spec:
   containers:
-  - image: redis
-    name: redis
+  - image: nginx
+    name: nginx-aff-pref
     resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Always
   affinity:
     nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: kubernetes.io/os
-            operator: In
-            values:
-            - linux
       preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 1
         preference:
           matchExpressions:
-          - key: label-1
+          - key: disktype
             operator: In
             values:
-            - key-1
+            - hdd
       - weight: 50
         preference:
           matchExpressions:
-          - key: label-2
+          - key: on-demand
             operator: In
             values:
-            - key-2
+            - common
