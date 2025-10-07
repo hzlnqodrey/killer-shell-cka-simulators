@@ -87,7 +87,7 @@ spec:
     kind: Deployment
     name: php-apache
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 5
   metrics:
   - type: Resource
     resource:
