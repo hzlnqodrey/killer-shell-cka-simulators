@@ -1,0 +1,15 @@
+# Configure all key-value pairs in a Secret as container environment variables 
+# https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/#configure-all-key-value-pairs-in-a-secret-as-container-environment-variables
+# kubectl create secret generic test-secret --from-literal=username='my-app' --from-literal=password='39528$vdg7Jb'
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-all
+spec:
+  containers:
+  - name: envars-all-container
+    image: nginx
+    envFrom:
+    - secretRef:
+        name: test-secret
